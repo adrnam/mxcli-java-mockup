@@ -2,7 +2,7 @@
 Matrix client in Java for testing
 
 
-### Example of sending message (using Java main method within code):
+### Example of sending message (using Java main method):
 See below.
 
 Required Values:
