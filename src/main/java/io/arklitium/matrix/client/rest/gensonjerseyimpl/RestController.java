@@ -104,8 +104,9 @@ public class RestController {
                 } else {
                     correctUrl = StringUtils.replaceFirst(target, "", "http://");
                 }
+                return  correctUrl;
             }
-            return correctUrl;
+            throw new RuntimeException(e);
         }
     }
 
