@@ -6,7 +6,7 @@ Matrix client in Java for testing (WIP)
 See below.
 
 Required Values:
-* your ```MATRIX_DOMAIN``` (e.g. ```example.org```) in ```SessionCtxt``` object;
+* your ```MATRIX_HS_SERVER``` in ```SessionCtxt``` object;
 * your ```USERNAME``` and ```PASSWORD```  in ```LoginReqData``` object;
 * your ```ROOM ID``` (e.g. "```!sKeLjnzKTXVithnjLF:example.org```") in  ```Room``` object
 
@@ -18,7 +18,7 @@ Note:
 public static void main(String[] args) throws NoSuchAlgorithmException, KeyManagementException {
         // initialize the session context
         RestController restController = new RestController(true, false);
-        SessionCtxt sessionCtxt = new SessionCtxt(<MATRIX_DOMAIN>, null, null);
+        SessionCtxt sessionCtxt = new SessionCtxt(<MATRIX_HS_SERVER>, null, null);
 
         // log in homeserver with your credentials and get the auth token
         LoginHandler loginHandler = new LoginHandlerImpl(sessionCtxt, restController);
