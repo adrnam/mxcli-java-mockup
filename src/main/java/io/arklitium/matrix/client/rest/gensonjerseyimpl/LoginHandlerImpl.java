@@ -36,8 +36,7 @@ public class LoginHandlerImpl implements LoginHandler {
 
     @Override
     public LogoutRespData logout(LogoutReqData logoutReqData) {
-        Response response = null;
-        response = restController.doPOST(
+        Response response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGOUT_PATH,
                 logoutReqData
@@ -49,8 +48,7 @@ public class LoginHandlerImpl implements LoginHandler {
 
     @Override
     public WhoamiRespData whoami() {
-        Response response = null;
-        response = restController.doGET(
+        Response response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.WHOAMI_PATH,
                 sessionCtxt.getToken()
