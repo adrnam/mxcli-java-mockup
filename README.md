@@ -1,5 +1,5 @@
 # mxcli-java-mockup
-Matrix client in Java for testing
+Matrix client in Java for testing (WIP)
 
 
 ### Example of sending message (using Java main method):
