@@ -98,7 +98,7 @@ public class RestController {
             return target;
         } catch (MalformedURLException e) {
             String correctUrl = null;
-            if (!StringUtils.startsWithIgnoreCase(target, "htttp")) {
+            if (!StringUtils.startsWithIgnoreCase(target, "http")) {
                 if (tls) {
                     correctUrl = StringUtils.replaceFirst(target, "", "https://");
                 } else {
