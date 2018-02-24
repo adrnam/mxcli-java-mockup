@@ -36,7 +36,7 @@ public class RoomSendingHandlerImpl implements RoomSendingHandler {
         Response response = null;
         response = restController.doPUT(
                 sessionCtxt.getHomeServer(),
-                RoomSendingHandler.buildPath(roomIdInUrlForm, sessionCtxt.getCurrentRoom().getTxnId().toString()),
+                RoomSendingHandler.buildPath(roomIdInUrlForm, sessionCtxt.getTxnId().toString()),
                 sessionCtxt.getToken(),
                 sendMessageReqData);
         SendMessageRespData sendMessageRespData = response.readEntity(SendMessageRespData.class);

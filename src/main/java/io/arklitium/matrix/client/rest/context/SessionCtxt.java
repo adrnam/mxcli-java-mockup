@@ -10,11 +10,13 @@ public class SessionCtxt {
     private String token;
     private List<Room> roomList;
     private Room currentRoom;
+    private Integer txnId;
 
     public SessionCtxt(String homeServer, List<Room> roomList, Room currentRoom) {
         this.homeServer = homeServer;
         this.roomList = roomList;
         this.currentRoom = currentRoom;
+        txnId = 0;
     }
 
     public String getHomeServer() {
@@ -48,4 +50,9 @@ public class SessionCtxt {
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
+
+    public Integer getTxnId() {
+        return txnId;
+    }
+
 }

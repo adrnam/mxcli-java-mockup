@@ -7,14 +7,11 @@ public class Room {
     private String roomId;
     private List<String> aliases;
     private String name;
-    private Integer txnId;
 
-
-    public Room(String roomId, List<String> aliases, String name, Integer txnId) {
+    public Room(String roomId, List<String> aliases, String name) {
         this.roomId = roomId;
         this.aliases = aliases;
         this.name = name;
-        this.txnId = txnId;
     }
 
     public String getRoomId() {
@@ -41,21 +38,12 @@ public class Room {
         this.name = name;
     }
 
-    public Integer getTxnId() {
-        return txnId;
-    }
-
-    public void setTxnId(Integer txnId) {
-        this.txnId = txnId;
-    }
-
     @Override
     public String toString() {
         return "Room{" +
                 "roomId='" + roomId + '\'' +
                 ", aliases=" + aliases +
                 ", name='" + name + '\'' +
-                ", txnId=" + txnId +
                 '}';
     }
 
