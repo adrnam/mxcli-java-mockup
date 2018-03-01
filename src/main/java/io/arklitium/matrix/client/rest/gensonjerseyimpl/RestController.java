@@ -1,6 +1,7 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +11,7 @@ import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
@@ -18,6 +20,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.List;
 
 public class RestController {
 
@@ -64,6 +67,20 @@ public class RestController {
         log.info("executing: " + target + "/" + path);
         Response response = client.target(target)
                 .path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + token)
+                .get();
+        return response;
+    }
+
+    public Response doGET(String target, String path, List<Pair> parameters, String token) {
+        target = formatUrl(target);
+        WebTarget webTarget = client.target(target).path(path);
+        for (Pair parameter : parameters) {
+            webTarget.queryParam(parameter.getLeft().toString(), parameter.getRight());
+        }
+        log.info("executing: " + webTarget.getUri().toString());
+        Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + token)
                 .get();
