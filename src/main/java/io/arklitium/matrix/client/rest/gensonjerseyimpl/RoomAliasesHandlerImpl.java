@@ -1,12 +1,10 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
-import io.arklitium.matrix.client.rest.api.rooms.RoomAliasesHandler;
 import io.arklitium.matrix.client.context.SessionCtxt;
+import io.arklitium.matrix.client.rest.api.rooms.RoomAliasesHandler;
 import io.arklitium.matrix.client.rest.jsonmodel.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.ws.rs.core.Response;
 
 public class RoomAliasesHandlerImpl implements RoomAliasesHandler {
 
@@ -29,13 +27,13 @@ public class RoomAliasesHandlerImpl implements RoomAliasesHandler {
 
     @Override
     public RoomAliasGetRespData getAliases(RoomAliasGetReqData roomAliasGetReqData) throws Exception {
-        Response response = restController.doGET(
+        RoomAliasGetRespData response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 RoomAliasesHandler.buildPath(roomAliasGetReqData.getRoomAlias()),
-                null
+                null,
+                RoomAliasGetRespData.class
         );
-        RoomAliasGetRespData roomAliasGetRespData = response.readEntity(RoomAliasGetRespData.class);
-        return roomAliasGetRespData;
+        return response;
     }
 
     @Override

@@ -5,7 +5,6 @@ import io.arklitium.matrix.client.rest.jsonmodel.*;
 
 /**
  * Endpoints related to operate user authentication.
- *
  */
 public interface LoginHandler extends Env {
 

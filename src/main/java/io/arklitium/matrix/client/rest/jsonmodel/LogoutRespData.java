@@ -5,4 +5,8 @@ public class LogoutRespData {
     public LogoutRespData() {
     }
 
+    @Override
+    public String toString() {
+        return "LogoutRespData{}";
+    }
 }

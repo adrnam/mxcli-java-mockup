@@ -1,10 +1,8 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
-import io.arklitium.matrix.client.rest.api.authentication.LoginHandler;
 import io.arklitium.matrix.client.context.SessionCtxt;
+import io.arklitium.matrix.client.rest.api.authentication.LoginHandler;
 import io.arklitium.matrix.client.rest.jsonmodel.*;
-
-import javax.ws.rs.core.Response;
 
 public class LoginHandlerImpl implements LoginHandler {
 
@@ -19,39 +17,38 @@ public class LoginHandlerImpl implements LoginHandler {
 
     @Override
     public LoginRespData login(LoginReqData loginReqData) throws Exception {
-        Response response = null;
-        response = restController.doPOST(
+        LoginRespData response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGIN_PATH,
                 null,
-                loginReqData
+                loginReqData,
+                LoginRespData.class
         );
-        LoginRespData loginRespData = response.readEntity(LoginRespData.class);
-        return loginRespData;
+        return response;
     }
 
     @Override
     public LogoutRespData logout(LogoutReqData logoutReqData) throws Exception {
-        Response response = restController.doPOST(
+        LogoutRespData response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGOUT_PATH,
                 null,
-                logoutReqData
+                logoutReqData,
+                LogoutRespData.class
         );
-        LogoutRespData logoutRespData = response.readEntity(LogoutRespData.class);
-        return logoutRespData;
+        return response;
     }
 
     @Override
     public WhoamiRespData whoami() throws Exception {
-        Response response = restController.doGET(
+        WhoamiRespData response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.WHOAMI_PATH,
                 null,
-                sessionCtxt.getToken()
+                sessionCtxt.getToken(),
+                WhoamiRespData.class
         );
-        WhoamiRespData whoamiRespData = response.readEntity(WhoamiRespData.class);
-        return whoamiRespData;
+        return response;
     }
 
 }

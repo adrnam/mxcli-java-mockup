@@ -1,13 +1,11 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
-import io.arklitium.matrix.client.rest.api.events.RoomSendingHandler;
 import io.arklitium.matrix.client.context.SessionCtxt;
+import io.arklitium.matrix.client.rest.api.events.RoomSendingHandler;
 import io.arklitium.matrix.client.rest.jsonmodel.SendMessageReqData;
 import io.arklitium.matrix.client.rest.jsonmodel.SendMessageRespData;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
-
-import javax.ws.rs.core.Response;
 
 public class RoomSendingHandlerImpl implements RoomSendingHandler {
 
@@ -28,15 +26,14 @@ public class RoomSendingHandlerImpl implements RoomSendingHandler {
         } catch (EncoderException e) {
             throw new RuntimeException(e);
         }
-        Response response = null;
-        response = restController.doPUT(
+        SendMessageRespData response = restController.doPUT(
                 sessionCtxt.getHomeServer(),
                 RoomSendingHandler.buildPath(roomIdInUrlForm, sessionCtxt.getTxnId().toString()),
                 null,
                 sendMessageReqData,
-                sessionCtxt.getToken());
-        SendMessageRespData sendMessageRespData = response.readEntity(SendMessageRespData.class);
-        return sendMessageRespData;
+                sessionCtxt.getToken(),
+                SendMessageRespData.class);
+        return response;
     }
 
 }

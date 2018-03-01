@@ -1,11 +1,10 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
-import io.arklitium.matrix.client.rest.api.rooms.ListingRoomsHandler;
 import io.arklitium.matrix.client.context.SessionCtxt;
+import io.arklitium.matrix.client.rest.api.rooms.ListingRoomsHandler;
 import io.arklitium.matrix.client.rest.jsonmodel.GetPublicRoomsRespData;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ListingRoomsHandlerImpl implements ListingRoomsHandler {
@@ -26,14 +25,14 @@ public class ListingRoomsHandlerImpl implements ListingRoomsHandler {
                 .addParameter("since", since)
                 .addParameter("server", server)
                 .create();
-        Response response = restController.doGET(
+        GetPublicRoomsRespData response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 ListingRoomsHandler.PUBLIC_ROOMS_PATH,
                 queryParameters,
-                sessionCtxt.getToken()
+                null,
+                GetPublicRoomsRespData.class
         );
-        GetPublicRoomsRespData getPublicRoomsRespData = response.readEntity(GetPublicRoomsRespData.class);
-        return getPublicRoomsRespData;
+        return response;
     }
 
     @Override
