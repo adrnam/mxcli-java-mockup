@@ -97,7 +97,7 @@ public class RestController {
         WebTarget webTarget = client.target(target).path(path);
         if (parameters != null) {
             for (Pair parameter : parameters) {
-                webTarget.queryParam(parameter.getLeft().toString(), parameter.getRight());
+                webTarget = webTarget.queryParam(parameter.getLeft().toString(), parameter.getRight());
             }
         }
         log.info("executing: {} {}", httpMethod, webTarget.getUri().toString());
