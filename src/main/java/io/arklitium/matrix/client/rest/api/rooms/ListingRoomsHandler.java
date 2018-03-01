@@ -19,8 +19,8 @@ public interface ListingRoomsHandler extends Env {
      * @param since  The server to fetch the public room lists from. Defaults to the local server.
      * @return the information related to requested list of public rooms
      */
-    GetPublicRoomsRespData getPublicRooms(Number limit, String since, String server);
+    GetPublicRoomsRespData getPublicRooms(Number limit, String since, String server) throws Exception;
 
-    void postPublicRooms();
+    void postPublicRooms() throws Exception;
 
 }

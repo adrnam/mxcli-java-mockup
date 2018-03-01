@@ -19,7 +19,7 @@ public interface LoginHandler extends Env {
      * @param loginReqData the JSON data required to log in
      * @return the information related to user session
      */
-    LoginRespData login(LoginReqData loginReqData);
+    LoginRespData login(LoginReqData loginReqData) throws Exception;
 
     /**
      * Invalidates an existing access token, so that it can no longer be used for authorization.
@@ -27,13 +27,13 @@ public interface LoginHandler extends Env {
      * @param logoutReqData the JSON data required to log out
      * @return the information related to ended user's session
      */
-    LogoutRespData logout(LogoutReqData logoutReqData);
+    LogoutRespData logout(LogoutReqData logoutReqData) throws Exception;
 
     /**
      * Gets information about the owner of a given access token.
      *
      * @return the information about the logged user.
      */
-    WhoamiRespData whoami();
+    WhoamiRespData whoami() throws Exception;
 
 }

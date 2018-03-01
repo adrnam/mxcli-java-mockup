@@ -20,7 +20,7 @@ public class LoginHandlerImpl implements LoginHandler {
     }
 
     @Override
-    public LoginRespData login(LoginReqData loginReqData) {
+    public LoginRespData login(LoginReqData loginReqData) throws Exception {
         Response response = null;
         response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
@@ -33,7 +33,7 @@ public class LoginHandlerImpl implements LoginHandler {
     }
 
     @Override
-    public LogoutRespData logout(LogoutReqData logoutReqData) {
+    public LogoutRespData logout(LogoutReqData logoutReqData) throws Exception {
         Response response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGOUT_PATH,
@@ -45,7 +45,7 @@ public class LoginHandlerImpl implements LoginHandler {
     }
 
     @Override
-    public WhoamiRespData whoami() {
+    public WhoamiRespData whoami() throws Exception {
         Response response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.WHOAMI_PATH,

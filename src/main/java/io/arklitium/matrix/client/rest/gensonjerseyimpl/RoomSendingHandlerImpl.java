@@ -6,8 +6,6 @@ import io.arklitium.matrix.client.rest.jsonmodel.SendMessageReqData;
 import io.arklitium.matrix.client.rest.jsonmodel.SendMessageRespData;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.core.Response;
 
@@ -23,7 +21,7 @@ public class RoomSendingHandlerImpl implements RoomSendingHandler {
     }
 
     @Override
-    public SendMessageRespData sendMessage(SendMessageReqData sendMessageReqData) {
+    public SendMessageRespData sendMessage(SendMessageReqData sendMessageReqData) throws Exception {
         String roomIdInUrlForm = null;
         try {
             roomIdInUrlForm = new URLCodec().encode(sessionCtxt.getCurrentRoom().getRoomId());

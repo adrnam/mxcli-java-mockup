@@ -52,36 +52,39 @@ public class RestController {
         this.tls = tls;
     }
 
-    public Response doGET(String target, String path, List<Pair> parameters) {
+    public Response doGET(String target, String path, List<Pair> parameters) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .get();
+        handleResponse(response);
         return response;
     }
 
-    public Response doGET(String target, String path, List<Pair> parameters, String authToken) {
+    public Response doGET(String target, String path, List<Pair> parameters, String authToken) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + authToken)
                 .get();
+        handleResponse(response);
         return response;
     }
 
-    public Response doPUT(String target, String path, List<Pair> parameters, Object payload) {
+    public Response doPUT(String target, String path, List<Pair> parameters, Object payload) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
         Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.json(payload));
+        handleResponse(response);
         return response;
     }
 
-    public Response doPUT(String target, String path, List<Pair> parameters, Object payload, String authToken) {
+    public Response doPUT(String target, String path, List<Pair> parameters, Object payload, String authToken) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
@@ -89,20 +92,22 @@ public class RestController {
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + authToken)
                 .put(payload != null ? Entity.json(payload) : null);
+        handleResponse(response);
         return response;
     }
 
-    public Response doPOST(String target, String path, List<Pair> parameters, Object payload) {
+    public Response doPOST(String target, String path, List<Pair> parameters, Object payload) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
         Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .post(payload != null ? Entity.json(payload) : null);
+        handleResponse(response);
         return response;
     }
 
-    public Response doPOST(String target, String path, List<Pair> parameters, Object payload, String authToken) {
+    public Response doPOST(String target, String path, List<Pair> parameters, Object payload, String authToken) throws Exception {
         WebTarget webTarget = buildWebTarget(target, path, parameters);
         log.info("executing: {}", webTarget.getUri().toString());
         log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
@@ -110,6 +115,7 @@ public class RestController {
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + authToken)
                 .post(payload != null ? Entity.json(payload) : null);
+        handleResponse(response);
         return response;
     }
 
@@ -140,6 +146,15 @@ public class RestController {
             }
             throw new RuntimeException(e);
         }
+    }
+
+    private void handleResponse(Response response) throws Exception {
+        if (response.getStatus() != 200) {
+            String responseData = response.readEntity(String.class);
+            throw new Exception(responseData);
+        }
+
+        log.info("{}", response.toString());
     }
 
 }

@@ -20,7 +20,7 @@ public interface RoomSendingHandler extends Env {
      * Builds the REST path to request a send-message event.
      *
      * @param roomId the Matrix room ID where to send
-     * @param txnId the transaction ID for this event
+     * @param txnId  the transaction ID for this event
      * @return the full REST path
      */
     static String buildPath(String roomId, String txnId) {
@@ -35,6 +35,6 @@ public interface RoomSendingHandler extends Env {
      * @param sendMessageReqData the JSON data containing the message to send.
      * @return the information related to the event sent.
      */
-    SendMessageRespData sendMessage(SendMessageReqData sendMessageReqData);
+    SendMessageRespData sendMessage(SendMessageReqData sendMessageReqData) throws Exception;
 
 }

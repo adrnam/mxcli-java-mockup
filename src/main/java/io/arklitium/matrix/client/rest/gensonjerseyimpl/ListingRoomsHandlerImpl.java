@@ -20,7 +20,7 @@ public class ListingRoomsHandlerImpl implements ListingRoomsHandler {
     }
 
     @Override
-    public GetPublicRoomsRespData getPublicRooms(Number limit, String since, String server) {
+    public GetPublicRoomsRespData getPublicRooms(Number limit, String since, String server) throws Exception {
         List<Pair> queryParameters = new QueryParametersBuilder()
                 .addParameter("limit", (limit == null ? null : limit.toString()))
                 .addParameter("since", since)
@@ -37,7 +37,7 @@ public class ListingRoomsHandlerImpl implements ListingRoomsHandler {
     }
 
     @Override
-    public void postPublicRooms() {
+    public void postPublicRooms() throws Exception {
         // todo
     }
 

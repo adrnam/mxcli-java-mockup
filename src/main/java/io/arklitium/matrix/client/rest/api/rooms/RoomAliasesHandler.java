@@ -15,10 +15,10 @@ public interface RoomAliasesHandler extends Env {
         return ret;
     }
 
-    RoomAliasPutRespData putAlias(RoomAliasPutReqData roomAliasPutReqData);
+    RoomAliasPutRespData putAlias(RoomAliasPutReqData roomAliasPutReqData) throws Exception;
 
-    RoomAliasGetRespData getAliases(RoomAliasGetReqData roomAliasGetReqData);
+    RoomAliasGetRespData getAliases(RoomAliasGetReqData roomAliasGetReqData) throws Exception;
 
-    RoomAliasDeleteRespData deleteAlias(RoomaliasDeleteReqData roomaliasDeleteReqData);
+    RoomAliasDeleteRespData deleteAlias(RoomaliasDeleteReqData roomaliasDeleteReqData) throws Exception;
 
 }
