@@ -1,10 +1,8 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
 import io.arklitium.matrix.client.rest.api.authentication.LoginHandler;
-import io.arklitium.matrix.client.rest.context.SessionCtxt;
+import io.arklitium.matrix.client.context.SessionCtxt;
 import io.arklitium.matrix.client.rest.jsonmodel.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.core.Response;
 

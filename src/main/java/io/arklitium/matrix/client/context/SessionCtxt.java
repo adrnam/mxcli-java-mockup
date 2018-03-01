@@ -1,4 +1,4 @@
-package io.arklitium.matrix.client.rest.context;
+package io.arklitium.matrix.client.context;
 
 import io.arklitium.matrix.client.datamodel.Room;
 

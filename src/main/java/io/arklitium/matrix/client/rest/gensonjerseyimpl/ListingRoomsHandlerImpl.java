@@ -1,7 +1,7 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
 import io.arklitium.matrix.client.rest.api.rooms.ListingRoomsHandler;
-import io.arklitium.matrix.client.rest.context.SessionCtxt;
+import io.arklitium.matrix.client.context.SessionCtxt;
 import io.arklitium.matrix.client.rest.jsonmodel.GetPublicRoomsRespData;
 import org.apache.commons.lang3.tuple.Pair;
 

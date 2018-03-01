@@ -1,7 +1,7 @@
 package io.arklitium.matrix.client.rest.gensonjerseyimpl;
 
 import io.arklitium.matrix.client.rest.api.events.RoomSendingHandler;
-import io.arklitium.matrix.client.rest.context.SessionCtxt;
+import io.arklitium.matrix.client.context.SessionCtxt;
 import io.arklitium.matrix.client.rest.jsonmodel.SendMessageReqData;
 import io.arklitium.matrix.client.rest.jsonmodel.SendMessageRespData;
 import org.apache.commons.codec.EncoderException;
