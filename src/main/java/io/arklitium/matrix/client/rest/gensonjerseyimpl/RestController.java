@@ -52,61 +52,76 @@ public class RestController {
         this.tls = tls;
     }
 
-    public Response doGET(String target, String path) {
-        target = formatUrl(target);
-        log.info("executing: " + target + "/" + path);
-        Response response = client.target(target)
-                .path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .get();
-        return response;
-    }
-
-    public Response doGET(String target, String path, String token) {
-        target = formatUrl(target);
-        log.info("executing: " + target + "/" + path);
-        Response response = client.target(target)
-                .path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Bearer " + token)
-                .get();
-        return response;
-    }
-
-    public Response doGET(String target, String path, List<Pair> parameters, String token) {
-        target = formatUrl(target);
-        WebTarget webTarget = client.target(target).path(path);
-        for (Pair parameter : parameters) {
-            webTarget.queryParam(parameter.getLeft().toString(), parameter.getRight());
-        }
-        log.info("executing: " + webTarget.getUri().toString());
+    public Response doGET(String target, String path, List<Pair> parameters) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
         Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Bearer " + token)
                 .get();
         return response;
     }
 
-    public Response doPUT(String target, String path, String token, Object payload) {
-        target = formatUrl(target);
-        log.info("executing: " + target + "/" + path);
-        Response response = client.target(target)
-                .path(path)
+    public Response doGET(String target, String path, List<Pair> parameters, String authToken) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
+        Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Bearer " + token)
+                .header("Authorization", "Bearer " + authToken)
+                .get();
+        return response;
+    }
+
+    public Response doPUT(String target, String path, List<Pair> parameters, Object payload) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
+        log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
+        Response response = webTarget
+                .request(MediaType.APPLICATION_JSON)
                 .put(Entity.json(payload));
         return response;
     }
 
+    public Response doPUT(String target, String path, List<Pair> parameters, Object payload, String authToken) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
+        log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
+        Response response = webTarget
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + authToken)
+                .put(payload != null ? Entity.json(payload) : null);
+        return response;
+    }
 
-    public Response doPOST(String target, String path, Object payload) {
-        target = formatUrl(target);
-        log.info("executing: " + target + "/" + path);
-        Response response = client.target(target)
-                .path(path)
+    public Response doPOST(String target, String path, List<Pair> parameters, Object payload) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
+        log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
+        Response response = webTarget
                 .request(MediaType.APPLICATION_JSON)
                 .post(payload != null ? Entity.json(payload) : null);
         return response;
+    }
+
+    public Response doPOST(String target, String path, List<Pair> parameters, Object payload, String authToken) {
+        WebTarget webTarget = buildWebTarget(target, path, parameters);
+        log.info("executing: {}", webTarget.getUri().toString());
+        log.info("with data: {}", (payload != null ? payload.toString() : "no data"));
+        Response response = webTarget
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + authToken)
+                .post(payload != null ? Entity.json(payload) : null);
+        return response;
+    }
+
+    private WebTarget buildWebTarget(String target, String path, List<Pair> parameters) {
+        target = formatUrl(target);
+        WebTarget webTarget = client.target(target).path(path);
+        if (parameters != null) {
+            for (Pair parameter : parameters) {
+                webTarget.queryParam(parameter.getLeft().toString(), parameter.getRight());
+            }
+        }
+        return webTarget;
     }
 
     private String formatUrl(String target) {
@@ -121,7 +136,7 @@ public class RestController {
                 } else {
                     correctUrl = StringUtils.replaceFirst(target, "", "http://");
                 }
-                return  correctUrl;
+                return correctUrl;
             }
             throw new RuntimeException(e);
         }

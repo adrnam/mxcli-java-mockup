@@ -6,15 +6,16 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-class QueryParamatersBuilder {
+class QueryParametersBuilder {
 
     private List<Pair> nameValueList;
 
-    QueryParamatersBuilder() {
+
+    QueryParametersBuilder() {
         nameValueList = new ArrayList<>();
     }
 
-    QueryParamatersBuilder addParameter(String name, String value) {
+    QueryParametersBuilder addParameter(String name, String value) {
         this.nameValueList.add(new ImmutablePair(name, value));
         return this;
     }

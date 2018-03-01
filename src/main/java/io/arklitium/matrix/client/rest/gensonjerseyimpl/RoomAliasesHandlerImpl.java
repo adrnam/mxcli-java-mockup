@@ -23,7 +23,7 @@ public class RoomAliasesHandlerImpl implements RoomAliasesHandler {
 
     @Override
     public RoomAliasPutRespData putAlias(RoomAliasPutReqData roomAliasPutReqData) {
-        log.warn("not yet implemented");
+        log.error("not yet implemented");
         return null;
     }
 
@@ -31,16 +31,16 @@ public class RoomAliasesHandlerImpl implements RoomAliasesHandler {
     public RoomAliasGetRespData getAliases(RoomAliasGetReqData roomAliasGetReqData) {
         Response response = restController.doGET(
                 sessionCtxt.getHomeServer(),
-                RoomAliasesHandler.buildPath(roomAliasGetReqData.getRoomAlias())
+                RoomAliasesHandler.buildPath(roomAliasGetReqData.getRoomAlias()),
+                null
         );
         RoomAliasGetRespData roomAliasGetRespData = response.readEntity(RoomAliasGetRespData.class);
-        log.info("status=" + response.getStatus() + " response: " + roomAliasGetRespData.toString());
         return roomAliasGetRespData;
     }
 
     @Override
     public RoomAliasDeleteRespData deleteAlias(RoomaliasDeleteReqData roomaliasDeleteReqData) {
-        log.warn("not yet implemented");
+        log.error("not yet implemented");
         return null;
     }
 

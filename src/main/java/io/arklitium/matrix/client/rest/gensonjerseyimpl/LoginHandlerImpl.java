@@ -10,8 +10,6 @@ import javax.ws.rs.core.Response;
 
 public class LoginHandlerImpl implements LoginHandler {
 
-    private final static Logger log = LogManager.getLogger(LoginHandlerImpl.class);
-
     private SessionCtxt sessionCtxt;
     private RestController restController;
 
@@ -27,10 +25,10 @@ public class LoginHandlerImpl implements LoginHandler {
         response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGIN_PATH,
+                null,
                 loginReqData
         );
         LoginRespData loginRespData = response.readEntity(LoginRespData.class);
-        log.info("status=" + response.getStatus() + " response: " + loginRespData.toString());
         return loginRespData;
     }
 
@@ -39,10 +37,10 @@ public class LoginHandlerImpl implements LoginHandler {
         Response response = restController.doPOST(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.LOGOUT_PATH,
+                null,
                 logoutReqData
         );
         LogoutRespData logoutRespData = response.readEntity(LogoutRespData.class);
-        log.info("status=" + response.getStatus() + " response: " + logoutRespData.toString());
         return logoutRespData;
     }
 
@@ -51,10 +49,10 @@ public class LoginHandlerImpl implements LoginHandler {
         Response response = restController.doGET(
                 sessionCtxt.getHomeServer(),
                 LoginHandler.WHOAMI_PATH,
+                null,
                 sessionCtxt.getToken()
         );
         WhoamiRespData whoamiRespData = response.readEntity(WhoamiRespData.class);
-        log.info("status=" + response.getStatus() + " response: " + whoamiRespData.toString());
         return whoamiRespData;
     }
 

@@ -13,8 +13,6 @@ import javax.ws.rs.core.Response;
 
 public class RoomSendingHandlerImpl implements RoomSendingHandler {
 
-    private final static Logger log = LogManager.getLogger(RoomSendingHandlerImpl.class);
-
     private SessionCtxt sessionCtxt;
     private RestController restController;
 
@@ -30,17 +28,16 @@ public class RoomSendingHandlerImpl implements RoomSendingHandler {
         try {
             roomIdInUrlForm = new URLCodec().encode(sessionCtxt.getCurrentRoom().getRoomId());
         } catch (EncoderException e) {
-            log.error(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
         Response response = null;
         response = restController.doPUT(
                 sessionCtxt.getHomeServer(),
                 RoomSendingHandler.buildPath(roomIdInUrlForm, sessionCtxt.getTxnId().toString()),
-                sessionCtxt.getToken(),
-                sendMessageReqData);
+                null,
+                sendMessageReqData,
+                sessionCtxt.getToken());
         SendMessageRespData sendMessageRespData = response.readEntity(SendMessageRespData.class);
-        log.info("status=" + response.getStatus() + " response: " + sendMessageRespData.toString());
         return sendMessageRespData;
     }
 
