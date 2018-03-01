@@ -15,7 +15,7 @@ Note:
 * if your server uses HTTPS with auto signed certificate, set ```RestController(true, true)```
 * if your server uses HTTPS and valid certificate, set ```RestController(true, false)```
 ```Java
-public static void main(String[] args) throws NoSuchAlgorithmException, KeyManagementException {
+public static void main(String[] args) throws Exception {
         // initialize the session context
         RestController restController = new RestController(true, false);
         SessionCtxt sessionCtxt = new SessionCtxt(<MATRIX_HS_SERVER>, null, null);
